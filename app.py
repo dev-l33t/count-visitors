@@ -10,6 +10,7 @@ class VisitorCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     count = db.Column(db.Integer, default=0)
 
+# This should work fine, but make sure app is initialized before decorators
 @app.before_first_request
 def create_db():
     db.create_all()
@@ -40,4 +41,4 @@ def index():
         return render_template('index.html', visitors=get_visitor_count())
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
